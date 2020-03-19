@@ -98,6 +98,43 @@ void insert_afterGivenItem(int item,int after)
     printf("\nThese are the elements of list after deleting:\n\n");
     travers();
 }
+void insertBeforeGivenNode(int before,int item)
+{
+    node *ptr,*newnode,*loc;
+    newnode=(node *)malloc(sizeof(node));
+    newnode->info=item;
+    if(head==NULL)
+    {
+        printf("\nList is Empty\n");
+    }
+    else
+    {
+        ptr=head;
+        while(ptr->info!=before && ptr!=NULL)
+        {
+            loc=ptr;
+            ptr=ptr->link;
+        }
+        if(ptr==NULL)
+        {
+            printf("\nGiven number is not presented in the list:\n");
+        }
+        else if(ptr==head)
+        {
+            newnode->link=ptr;
+            head=newnode;
+            printf("\nThese are the elements of list after deleting:\n\n");
+            travers();
+        }
+        else
+        {
+            loc->link=newnode;
+            newnode->link=ptr;
+            printf("\nThese are the elements of list after deleting:\n\n");
+            travers();
+        }
+    }
+}
 void main()
 {
     int n,i,beg,end,choice,srch,after,numAfter,before,numBefore;
@@ -212,6 +249,30 @@ void main()
         {
             printf("\nEnvalid Entry....Please select only \"Y for Yes\" OR \"N for No\":\n");
             goto ent;
+        }
+   case 5:
+        printf("\nEnter a Number before that you want to inseret newnode: ");
+        scanf("%d",&before);
+        printf("\nEnter that number which you want to inseret: ");
+        scanf("%d",&numBefore);
+        insertBeforeGivenNode(before,numBefore);
+        sol:
+        printf("\nDo you want to continue ? (Y/N): ");
+        con=getch();
+        if(con == 'Y' || con == 'y')
+        {
+        //    printf("\nVikram\n");
+            goto ab;
+        }
+        else if(con == 'N' || con == 'n')
+        {
+            //printf("\nSolty\n");
+            break;
+        }
+        else
+        {
+            printf("\nEnvalid Entry....Please select only \"Y for Yes\" OR \"N for No\":\n");
+            goto sol;
         }
     default:
         printf("\nEnvalid Choice:\n");
