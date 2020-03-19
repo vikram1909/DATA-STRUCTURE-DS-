@@ -97,9 +97,97 @@ node *search(int item)
         return(NULL);
     }
 }
+void deleteAfterGivenNode(int after)
+{
+    node *loc,*ptr,*temp;
+    ptr=head;
+    if(head==NULL)
+    {
+        printf("\nList is Empty:\n");
+    }
+    else
+    {
+        do
+        {
+            loc=ptr;
+            ptr=ptr->next;
+        }while(loc->info!=after);
+        if(loc==tail)
+        {
+            printf("\nNo node exist after given number:\n");
+        }
+        else
+        {
+            temp=ptr->next;
+            loc->next=temp;
+            temp->prev=loc;
+            free(ptr);
+            printf("\nThese are the elements of List after deleting node:\n");
+            traverse();
+        }
+    }
+}
+void deleteBeforeGivenNode(int before)
+{
+    node *loc,*temp1,*temp2;
+    loc=search(before);
+    if(loc==NULL)
+    {
+        printf("\nGiven number is not presented in list:\n");
+    }
+    else if(loc->prev==NULL)
+    {
+        printf("\nNo any node presents before given node:\n");
+    }
+    else if(loc->prev==head)
+    {
+        head=loc;
+        free(loc->prev);
+        loc->prev=NULL;
+        printf("\nThese are the elements of List after deleting node:\n");
+        traverse();
+    }
+    else
+    {
+        temp1=loc->prev;
+        temp2=temp1->prev;
+        temp2->next=loc;
+        loc->prev=temp2;
+        free(temp1);
+        printf("\nThese are the elements of List after deleting node:\n");
+        traverse();
+    }
+}
+void deleteGivenNode(int given)
+{
+    node *loc,*temp1,*temp2;
+    loc=search(given);
+    if(loc==NULL)
+    {
+        printf("\nGiven number is not presented in list:\n");
+    }
+    else if(loc==head)
+    {
+        head=loc->next;
+        head->prev=NULL;
+        free(loc);
+        printf("\nThese are the elements of List after deleting given node:\n");
+        traverse();
+    }
+    else
+    {
+        temp1=loc->prev;
+        temp2=loc->next;
+        temp1->next=temp2;
+        temp2->prev=temp1;
+        free(loc);
+        printf("\nThese are the elements of List after deleting given node:\n");
+        traverse();
+    }
+}
 void main()
 {
-    int n,i,choice,item;
+    int n,i,choice,item,after,before,given;
     node *r;
     empty();
     printf("\nEnter size of List: ");
@@ -133,5 +221,21 @@ void main()
                 printf("\nNumber doea not exist in the List:\n");
             else
                 printf("\nNumber %d Founded...\n",r->info);
+            break;
+        case 4:
+            printf("\nEnter number after that you want to delete: ");
+            scanf("%d",&after);
+            deleteAfterGivenNode(after);
+            break;
+        case 5:
+            printf("\nEnter number before that you want to delete: ");
+            scanf("%d",&before);
+            deleteBeforeGivenNode(before);
+            break;
+        case 6:
+            printf("\nEnter number that you want to delete: ");
+            scanf("%d",&given);
+            deleteGivenNode(given);
+            break;
     }
 }
