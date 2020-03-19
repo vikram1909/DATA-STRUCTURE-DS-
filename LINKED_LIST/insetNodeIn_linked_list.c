@@ -110,7 +110,7 @@ void insertBeforeGivenNode(int before,int item)
     else
     {
         ptr=head;
-        while(ptr->info!=before && ptr!=NULL)
+        while(ptr!=NULL && ptr->info!=before)
         {
             loc=ptr;
             ptr=ptr->link;
