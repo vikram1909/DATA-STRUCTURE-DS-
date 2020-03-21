@@ -58,6 +58,8 @@ node * search(int item)
             return(ptr);
         ptr=ptr->link;
     }
+    if(ptr->info==item)
+        return(ptr);
     return(NULL);
 }
 void insertAtBegining(int item)
