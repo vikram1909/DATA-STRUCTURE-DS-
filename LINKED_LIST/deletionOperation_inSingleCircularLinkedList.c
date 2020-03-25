@@ -76,8 +76,12 @@ void deleteFirstNode()
     node *ptr,*temp;
     ptr=temp=head;
     if(head==NULL)
-    {
         printf("\nList is Empty:\n");
+    else if(ptr->link==head&&head==ptr)
+    {
+        head=NULL;
+        printf("\nThese are the Elements of List:\n");    //when only one node is available in the List.
+        traverse();
     }
     else
     {
@@ -97,8 +101,12 @@ void deleteLastNode()
     node *ptr,*loc;
     ptr=head;
     if(head==NULL)
-    {
         printf("\nList is Empty:\n");
+    else if(ptr->link==head&&ptr==head)
+    {
+        head=NULL;
+        printf("\nThese are the Elements of List:\n");         //when only one node is available in the List.
+        traverse();
     }
     else
     {
@@ -118,8 +126,13 @@ void deleteGivenNode(int item)
   node *loc,*temp;
   loc=search(item);
   if(loc==NULL)
-  {
       printf("\nNumber does not exits in the List:\n");
+  else if(loc->link==head&&loc==head)
+  {
+        head=NULL;
+        printf("\nNode is deleted;\n");                              //when only one node is available in the List.
+        printf("\nThese are the Elements of List:\n");
+        traverse();
   }
   else if(loc==head)
   {
